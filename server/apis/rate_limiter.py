@@ -15,8 +15,8 @@ class RateLimiter:
                  max_requests: int,
                  interval_seconds: int,
                  user_id: str = "global",
-                 redis_host: str = "localhost",
-                 redis_port: int = 6381,
+                 redis_host: str = "redis_mcp",
+                 redis_port: int = 6379,
                  redis_db: int = 0):
         """
         :param key_prefix: namespace prefix for Redis key

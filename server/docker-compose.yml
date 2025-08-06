@@ -10,8 +10,22 @@ services:
     ports:
       - "6381:6379"
     networks:
-      - jobnet
+      - mcp_net
+
+  home_mcp:
+    build: .
+    container_name: home_mcp
+    hostname: home_mcp
+    ports:
+      - "8089:8089"
+    restart: unless-stopped
+    volumes:
+      - .:/app
+    networks:
+      - mcp_net
+    depends_on:
+      - redis
 
 networks:
-  jobnet:
+  mcp_net:
     driver: bridge

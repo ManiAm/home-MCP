@@ -49,19 +49,17 @@ Navigate to the server directory:
 
     cd <project-root>/server
 
-Start Redis (used for rate limiting and state tracking):
-
-    docker compose up -d
-
 Create a `.env` file in the same directory and provide valid API keys for external services:
 
     FINNHUB_API_KEY=your_finnhub_key
     TimeZoneDB_API_KEY=your_timezone_key
     OpenWeather_API_KEY=your_openweather_key
+    INFLUXDB_TOKEN=your_influx_key
 
-Start the MCP server:
+Start all containers:
 
-    python3 main.py
+    docker compose build
+    docker compose up -d
 
 This will launch the MCP server, which exposes tool-based APIs to compatible clients.
 

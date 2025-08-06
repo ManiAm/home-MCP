@@ -21,6 +21,9 @@ log = logging.getLogger(__name__)
 
 load_dotenv()
 
+influx_url = "http://zeus.home"
+
+
 class InfluxDB_Access():
 
     def __init__(self,
@@ -30,7 +33,7 @@ class InfluxDB_Access():
 
         self.client = None
         self.log_influx_db_dir = os.getcwd()
-        self.legacy = False
+
         self.boilerplate_cols = [
             'result',
             'table',
@@ -310,7 +313,7 @@ class InfluxDB_Access():
 
 
     @staticmethod
-    def write_points(data_list, url="http://zeus.home", port=8086, database_name="mcp_server_home", timeout=None):
+    def write_points(data_list, url=influx_url, port=8086, database_name="mcp_server_home", timeout=5_000):
 
         url_port = f"{url}:{port}"
 
@@ -322,7 +325,7 @@ class InfluxDB_Access():
 
 
     @staticmethod
-    def read_points(query, url="http://zeus.home", port=8086, timeout=None):
+    def read_points(query, url=influx_url, port=8086, timeout=None):
 
         url_port = f"{url}:{port}"
 
