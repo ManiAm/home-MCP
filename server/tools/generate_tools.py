@@ -6,6 +6,7 @@ import logging
 from typing import Any, Optional
 from pydantic import BaseModel, create_model
 from langchain.tools import StructuredTool
+from .metrics import instrument
 
 log = logging.getLogger(__name__)
 
@@ -41,7 +42,7 @@ def make_wrapper_noarg(method, name: str):
             log.error(f"[TOOL ERROR] {name}: {str(e)}")
             return f"Tool {name} failed: {str(e)}"
 
-    return wrapper
+    return instrument(name)(wrapper)
 
 
 def make_wrapper(method, name: str):
@@ -65,7 +66,7 @@ def make_wrapper(method, name: str):
             log.error("[TOOL ERROR] %s: %s", name, str(e))
             return f"Tool {name} failed: {str(e)}"
 
-    return wrapper
+    return instrument(name)(wrapper)
 
 
 def generate_tools_from_client(client_instance):

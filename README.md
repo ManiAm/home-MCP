@@ -33,6 +33,14 @@ External APIs such as OpenWeatherMap, Finnhub, and TimeZoneDB typically enforce 
 
 - When a new request is made, the rate limiter first removes outdated entries from Redis that fall outside the configured time window (interval_seconds) using `ZREMRANGEBYSCORE`. It then checks how many requests remain within the valid window using `ZCARD`. If the number exceeds the allowed threshold (max_requests), it calculates the remaining wait time by examining the oldest request timestamp and pauses execution until the window clears. If the request is within limits, it logs the current request timestamp into Redis using `ZADD`, ensuring accurate tracking for future rate checks.
 
+## Monitoring
+
+Monitoring your MCP server is essential to ensure reliability, maintain performance, and proactively detect issues in real-time. A well-monitored MCP setup gives visibility into tool usage, latency, failure rates, and external API behavior enabling faster debugging and better resource planning. These metrics can be pushed to a time-series database like InfluxDB, enabling historical tracking and visualization through dashboards such as Grafana.
+
+In this project, we implement monitoring by wrapping each tool function with a custom instrument decorator that records invocation metadata. This wrapper captures the tool name, invocation timestamp, execution duration, and relevant request parameters, then sends this information to InfluxDB. We include tags such as hostname, username, and tool name to support rich filtering in dashboards or queries. This approach enables lightweight, real-time observability across all tools served by the MCP server without modifying the core tool logic.
+
+<img src="pics/tool_duration.png" alt="segment" width="850">
+
 ## Demo
 
 ### Start MCP Server
