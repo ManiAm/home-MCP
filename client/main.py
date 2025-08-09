@@ -23,7 +23,7 @@ load_dotenv()
 def print_tools(tools):
 
     for tool in tools:
-        print(f"\n🔧 Tool: {tool.name}")
+        print(f"\n>>>> Tool: {tool.name}")
         print(f"Description: {tool.description}")
 
 
@@ -89,7 +89,15 @@ async def main():
             "Compare NVIDIA stock price with Apple.",
 
             "Who owns SpaceX?",
-            "What is Taylor Swift's net worth in 2025?"
+            "What is Taylor Swift's net worth in 2025?",
+
+            "Can you find a song titled 'Shape of You' by Ed Sheeran?",
+            "I'm looking for a song called 'Rolling in the Deep' by Adele. Can you find it?",
+            "Please find details about the artist 'Ariana Grande'.",
+
+            "Can you list all the emails I received today?",
+
+            "Can you list my upcoming events for this week?"
         ]
 
         for user_question in user_questions:

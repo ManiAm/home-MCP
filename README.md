@@ -25,6 +25,12 @@ Tools exposed by this MCP server:
 
 - Web Search (`DuckDuckGo`): This tool enables lightweight web search by querying DuckDuckGo's Instant Answer API to fetch real-time search results. It is useful for handling general knowledge queries not covered by internal tools or APIs. The returned results include page titles, content snippets, and source URLs, providing agents with grounded answers and users with credible references. DuckDuckGo is privacy-focused and does not track queries, making it a reliable and safe fallback source.
 
+- Google Mail (`Gmail`): This tool provides integration with Gmail, enabling users to read, send, and organize emails programmatically. Through the Gmail API, it allows access to inbox data, including reading email threads, composing new messages, managing labels. The tool is designed to facilitate email automation, manage inbox workflows, and integrate email interactions within larger assistant or productivity systems.
+
+- Google Calendar: This tool interacts with Google Calendar, enabling users to manage events and appointments programmatically. It supports creating, updating, and deleting events, as well as reading event details from a user's calendar. This maks it useful for personal assistants, scheduling bots, and workflow automations requiring calendar management and integration with other tools.
+
+- Spotify: This tool provides programmatic access to Spotify's music catalog, allowing users to search for tracks, albums, artists, and playlists. Note that Spotify Web API itself does not provide direct access to stream full music files. Instead, it allows you to control playback and access music metadata. You can play music on a Spotify client or supported devices using the API, but streaming full music files directly from the API is not supported due to licensing and copyright restrictions.
+
 ## Rate Limitting
 
 External APIs such as OpenWeatherMap, Finnhub, and TimeZoneDB typically enforce strict usage quotas (e.g., requests per minute or per day) to protect their infrastructure from abuse and ensure fair usage among clients. Without safeguards, a burst of requests (intentional or accidental) could lead to bans, temporary blacklisting, or degraded service. To mitigate this, the MCP server implements server-side rate limiting. Our implementation uses Redis sorted sets (`ZSET`) to implement a sliding window rate limiter. Here's how it operates:

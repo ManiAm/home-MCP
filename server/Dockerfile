@@ -24,7 +24,11 @@ RUN pip install \
     redis \
     influxdb-client \
     tabulate \
-    duckduckgo-search
+    duckduckgo-search \
+    spotipy \
+    html2text \
+    google-api-python-client \
+    google-auth-oauthlib
 
 WORKDIR /app
 EXPOSE 8089
